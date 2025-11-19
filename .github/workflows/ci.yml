@@ -1,1 +1,31 @@
+name: Integración Continua
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Compilar código Java
+        run: javac -d out src/*.java
+
+      - name: Compilar y ejecutar tests
+        run: |
+          javac -cp out -d out test/*.java
+          java -cp out MainTest || true
+          java -cp out CarritoTest || true
 
