@@ -1,16 +1,13 @@
 public class Main {
     public static void main(String[] args) {
-        Producto p1 = new Producto("Camiseta deportiva", 59.90);
-        Producto p2 = new Producto("Short de entrenamiento", 79.90);
-        Producto p3 = new Producto("Zapatillas running", 199.90);
-
         Carrito carrito = new Carrito();
-        carrito.agregarProducto(p1);
-        carrito.agregarProducto(p2);
-        carrito.agregarProducto(p3);
+        carrito.agregarProducto(new Producto("Camiseta", 50.0));
+        carrito.agregarProducto(new Producto("Pantalón", 80.0));
 
         double total = carrito.calcularTotal();
+        double totalConIGV = carrito.calcularTotalConIGV();
 
-        System.out.println("Total de la compra: S/ " + total);
+        System.out.println("Total sin IGV: " + total);
+        System.out.println("Total con IGV: " + totalConIGV);
     }
 }
