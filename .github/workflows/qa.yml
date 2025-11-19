@@ -1,0 +1,32 @@
+name: QA - Pruebas de Calidad
+
+on:
+  push:
+    branches: [ "qa" ]
+
+jobs:
+  qa-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Compilar código Java para QA
+        run: javac -d out src/*.java
+
+      - name: Ejecutar pruebas QA
+        run: |
+          javac -cp out -d out test/*.java
+          echo "Ejecutando tests de QA..."
+          java -cp out CarritoTest
+          java -cp out MainTest
+
+      - name: Resultado QA
+        run: echo "Revisión QA finalizada. Si todo pasó, puedes hacer merge a main."
