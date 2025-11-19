@@ -3,17 +3,23 @@ import java.util.List;
 
 public class Carrito {
     private List<Producto> productos;
+    private double descuentoPorcentaje;  
 
     public Carrito() {
-        this.productos = new ArrayList<>();
+        productos = new ArrayList<>();
+        descuentoPorcentaje = 0.0;
     }
 
     public void agregarProducto(Producto producto) {
         productos.add(producto);
     }
 
+    public void aplicarDescuento(double porcentaje) {
+        descuentoPorcentaje = porcentaje;
+    }
+
     public double calcularTotal() {
-        double total = 0;
+        double total = 0.0;
         for (Producto p : productos) {
             total += p.getPrecio();
         }
@@ -24,8 +30,12 @@ public class Carrito {
         return calcularTotal() * 0.18;
     }
 
-    public double calcularTotalConIGV() {
-        return calcularTotal() + calcularIGV();
+    public double calcularDescuento() {
+        return calcularTotal() * descuentoPorcentaje;
+    }
+
+    public double calcularTotalFinal() {
+        return calcularTotal() + calcularIGV() - calcularDescuento();
     }
 }
 
