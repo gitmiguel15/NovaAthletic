@@ -5,7 +5,7 @@ public class Carrito {
     private List<Producto> productos;
 
     public Carrito() {
-        productos = new ArrayList<>();
+        this.productos = new ArrayList<>();
     }
 
     public void agregarProducto(Producto producto) {
@@ -13,11 +13,20 @@ public class Carrito {
     }
 
     public double calcularTotal() {
-        double total = 0.0;
+        double total = 0;
         for (Producto p : productos) {
             total += p.getPrecio();
         }
         return total;
     }
+
+    public double calcularIGV() {
+        return calcularTotal() * 0.18;
+    }
+
+    public double calcularTotalConIGV() {
+        return calcularTotal() + calcularIGV();
+    }
 }
+
 
